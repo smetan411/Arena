@@ -32,6 +32,7 @@ public final class Obchodnik implements CommandExecutor {
         if (!(commandSender instanceof Player)) return false;
         var player = (Player) commandSender;
         var trader = (WanderingTrader) player.getWorld().spawnEntity(player.getLocation(), EntityType.WANDERING_TRADER);
+        var trader1 = player.getWorld().spawn(player.getLocation(), WanderingTrader.class);
         trader.setAI(false);
         trader.setCustomName(JMENO_OBCHODNIKA);
         trader.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, 1000000000, 999999999, true));
@@ -52,7 +53,7 @@ public final class Obchodnik implements CommandExecutor {
         MerchantRecipe trainingBoots = new MerchantRecipe(tovarnaNaZbroje.vyrobTrainingBoots(), 999);
         trainingBoots.addIngredient(new ItemStack(Material.GOLD_NUGGET, 10));
 
-        //nomal
+        //normal
         MerchantRecipe normalSword = new MerchantRecipe(tovarnaNaZbrane.vyrobNormalSword(), 999);
         normalSword.addIngredient(new ItemStack(Material.GOLD_NUGGET, 30));
 

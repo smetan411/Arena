@@ -4,10 +4,7 @@ package arena;
 import arena.commands.MecNaObchodnika;
 import arena.commands.Obchodnik;
 import arena.commands.ZabijVsechnaMonstra;
-import arena.listenery.ObchodnikNesmrtelnost;
-import arena.listenery.OdmenaZaZabitiMonstra;
-import arena.listenery.PripojeniRespawn;
-import arena.listenery.SmrtMonstra;
+import arena.listenery.*;
 import arena.monstra.MonstraStav;
 import arena.monstra.TovarnaNaZombiky;
 import arena.monstra.VlnyMonster;
@@ -49,6 +46,7 @@ public class MainArena extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new PripojeniRespawn(), this);
         getServer().getPluginManager().registerEvents(dvereArenyListener, this);
         getServer().getPluginManager().registerEvents(new ObchodnikNesmrtelnost(), this);
+        getServer().getPluginManager().registerEvents(new ZbraneListener(), this);
 
         //commandy
         getCommand("+obchodnik").setExecutor(new Obchodnik());
