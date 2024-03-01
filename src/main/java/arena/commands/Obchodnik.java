@@ -32,7 +32,6 @@ public final class Obchodnik implements CommandExecutor {
         if (!(commandSender instanceof Player)) return false;
         var player = (Player) commandSender;
         var trader = (WanderingTrader) player.getWorld().spawnEntity(player.getLocation(), EntityType.WANDERING_TRADER);
-        var trader1 = player.getWorld().spawn(player.getLocation(), WanderingTrader.class);
         trader.setAI(false);
         trader.setCustomName(JMENO_OBCHODNIKA);
         trader.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, 1000000000, 999999999, true));
