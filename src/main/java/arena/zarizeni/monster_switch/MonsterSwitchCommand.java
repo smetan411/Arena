@@ -9,7 +9,7 @@ import org.bukkit.inventory.ItemStack;
 
 public class MonsterSwitchCommand implements CommandExecutor {
 
-    public final static String MONSTER_SWITCH_NAME = "Monster switch";
+    public final static String MONSTER_SWITCH_NAME = "Monster_switch";
 
     @Override
     public boolean onCommand( CommandSender commandSender, Command command, String s, String[] strings) {

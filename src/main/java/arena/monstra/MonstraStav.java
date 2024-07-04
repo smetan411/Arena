@@ -17,7 +17,7 @@ public final class MonstraStav {
     }
 
     public boolean jeMonstrum(LivingEntity monstrum) {
-        var jmeno = monstrum.getCustomName();
+        String jmeno = monstrum.getCustomName();
         if (Strings.isNullOrEmpty(jmeno)) return false;
         return jmeno.startsWith(ZOMBIE_NAME);
     }

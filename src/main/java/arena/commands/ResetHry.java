@@ -7,8 +7,8 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-import static arena.zarizeni.dvere_areny.DvereAreny.DVERE_DO_ARENY_ZNACKA;
-import static arena.zarizeni.monster_switch.MonsterSwitchListener.MONSTER_SWITCH_ZNACKA;
+import static arena.zarizeni.dvere_areny.DvereAreny.JMENO_DVERI_DO_ARENY;
+import static arena.zarizeni.monster_switch.MonsterSwitchCommand.MONSTER_SWITCH_NAME;
 
 public class ResetHry implements CommandExecutor {
 
@@ -26,8 +26,7 @@ public class ResetHry implements CommandExecutor {
         var player = (Player) commandSender;
         if (player.isOp()) {
             dvereAreny.clear();
-            uloziste.smaz(MONSTER_SWITCH_ZNACKA);
-            uloziste.smaz(DVERE_DO_ARENY_ZNACKA);
+            uloziste.smazCeleUloziste();
         }
         return true;
     }

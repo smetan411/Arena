@@ -73,7 +73,7 @@ public class TovarnaNaZbrane {
         var itemMeta = frozenSword.getItemMeta();
         itemMeta.setDisplayName(FROZEN_SWORD);
         itemMeta.setUnbreakable(true);
-        AttributeModifier attributeModifier = new AttributeModifier("Damage", 6, AttributeModifier.Operation.ADD_NUMBER);
+        AttributeModifier attributeModifier = new AttributeModifier("Damage", 8, AttributeModifier.Operation.ADD_NUMBER);
         itemMeta.addAttributeModifier(Attribute.GENERIC_ATTACK_DAMAGE, attributeModifier);
         frozenSword.setItemMeta(itemMeta);
         return frozenSword;
@@ -84,7 +84,7 @@ public class TovarnaNaZbrane {
         var itemMeta = healingSword.getItemMeta();
         itemMeta.setDisplayName(HEALING_SWORD);
         itemMeta.setUnbreakable(true);
-        AttributeModifier attributeModifier = new AttributeModifier("Damage", 5, AttributeModifier.Operation.ADD_NUMBER);
+        AttributeModifier attributeModifier = new AttributeModifier("Damage", 8, AttributeModifier.Operation.ADD_NUMBER);
         itemMeta.addAttributeModifier(Attribute.GENERIC_ATTACK_DAMAGE, attributeModifier);
         healingSword.setItemMeta(itemMeta);
         return healingSword;

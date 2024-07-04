@@ -13,14 +13,15 @@ import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.metadata.FixedMetadataValue;
+import org.bukkit.metadata.MetadataValue;
 import org.bukkit.plugin.Plugin;
+
+import java.util.List;
 
 import static arena.zarizeni.monster_switch.MonsterSwitchCommand.MONSTER_SWITCH_NAME;
 
 
 public final class MonsterSwitchListener implements Listener {
-
-    public final static String MONSTER_SWITCH_ZNACKA = "MONSTER_SWITCH_ZNACKA";
 
     private final Plugin plugin;
     private final DvereAreny dvere;
@@ -38,15 +39,19 @@ public final class MonsterSwitchListener implements Listener {
 
     @EventHandler
     public void spawnMonsters(PlayerInteractEvent e) {
+        //udalost PlayerInteractEvent se pusti i pri zniceni
+        // a polozeni bloku, timto zabranime vygenerovani monster po zniceni
         if (e.getAction() != Action.RIGHT_CLICK_BLOCK)
-            return; //udalost PlayerInteractEvent se pusti i pri zniceni a polozeni bloku, timto zabranime vygenerovani monster pro zniceni
-        if (e.getClickedBlock().getType() != Material.LEVER) return; // zabranime pokracovani pri olozeni blocku
+            return;
+        // zabranime pokracovani pri polozeni blocku
+        if (e.getClickedBlock().getType() != Material.LEVER) return;
+
         if (!monstraStav.jsouMonstraMrtva()) return;
 
         var block = e.getClickedBlock();
         if (block == null) return;
 
-        var blockMetadata = block.getMetadata(MONSTER_SWITCH_ZNACKA);
+        List<MetadataValue> blockMetadata = block.getMetadata(MONSTER_SWITCH_NAME);
         if (!blockMetadata.isEmpty()) {
             dvere.zavriDvere();
             vlnyMonster.dalsiVlna(block.getLocation());
@@ -57,29 +62,29 @@ public final class MonsterSwitchListener implements Listener {
     public void placeMonsterSwitch(BlockPlaceEvent e) {
         if (MONSTER_SWITCH_NAME.equals(e.getItemInHand().getItemMeta().getDisplayName())) {
             var block = e.getBlockPlaced();
-            block.setMetadata(MONSTER_SWITCH_ZNACKA, new FixedMetadataValue(plugin, true));
-            uloziste.pridej(MONSTER_SWITCH_ZNACKA, block.getLocation());
+            block.setMetadata(MONSTER_SWITCH_NAME, new FixedMetadataValue(plugin, true));
+            uloziste.pridej(MONSTER_SWITCH_NAME, block.getLocation());
         }
     }
 
     @EventHandler
     public void znicMonsterSwitch(BlockBreakEvent e) {
-        var blockMetadata = e.getBlock().getMetadata(MONSTER_SWITCH_ZNACKA);
+        var blockMetadata = e.getBlock().getMetadata(MONSTER_SWITCH_NAME);
         if (!blockMetadata.isEmpty()) {
-            e.getBlock().removeMetadata(MONSTER_SWITCH_ZNACKA, plugin);
-            uloziste.odeber(MONSTER_SWITCH_ZNACKA, e.getBlock().getLocation());
+            e.getBlock().removeMetadata(MONSTER_SWITCH_NAME, plugin);
+            uloziste.odeber(MONSTER_SWITCH_NAME, e.getBlock().getLocation());
             opravUloziste();
         }
     }
 
     private void opravUloziste() {
-        var lokaceSpinacu = Sets.newHashSet(uloziste.nacti(MONSTER_SWITCH_ZNACKA));
+        var lokaceSpinacu = Sets.newHashSet(uloziste.nacti(MONSTER_SWITCH_NAME));
         for (var lokaceSpinace : lokaceSpinacu) {
-            var metadataSpinace = lokaceSpinace.getBlock().getMetadata(MONSTER_SWITCH_ZNACKA);
+            var metadataSpinace = lokaceSpinace.getBlock().getMetadata(MONSTER_SWITCH_NAME);
             if (metadataSpinace.isEmpty()) {
                 lokaceSpinacu.remove(lokaceSpinace);
             }
         }
-        uloziste.uloz(MONSTER_SWITCH_ZNACKA, lokaceSpinacu);
+        uloziste.uloz(MONSTER_SWITCH_NAME, lokaceSpinacu);
     }
 }

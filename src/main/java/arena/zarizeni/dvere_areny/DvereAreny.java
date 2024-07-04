@@ -2,16 +2,17 @@ package arena.zarizeni.dvere_areny;
 
 import arena.zarizeni.uloziste_dat.Uloziste;
 import com.google.common.collect.Lists;
+import com.google.common.collect.Sets;
 import org.bukkit.block.Block;
 import org.bukkit.block.data.type.Door;
 import org.bukkit.metadata.FixedMetadataValue;
 import org.bukkit.plugin.Plugin;
 import java.util.List;
+import java.util.Set;
 
 public final class DvereAreny {
-    public static final String JMENO_DVERI_DO_ARENY = "Dvere do areny";
-    public static final String DVERE_DO_ARENY_ZNACKA = "DVERE_DO_ARENY_ZNACKA";
-    private final List<Block> dvere = Lists.newArrayList();
+    public static final String JMENO_DVERI_DO_ARENY = "Dvere_do_areny";
+    private final Set<Block> dvere = Sets.newHashSet();
     private final Plugin plugin;
     private final Uloziste uloziste;
 
@@ -21,10 +22,10 @@ public final class DvereAreny {
     }
 
     private void zmenStavDveri(boolean stav) {
-        for (Block blokDveri : dvere) {
-            Door dvere = (Door) blokDveri.getBlockData();
+        for (Block block : dvere) {
+            Door dvere = (Door) block.getBlockData();
             dvere.setOpen(stav);
-            blokDveri.setBlockData(dvere);
+            block.setBlockData(dvere);
         }
     }
 
@@ -39,13 +40,13 @@ public final class DvereAreny {
     public void pridejDvere(Block block) {
         block.setMetadata(JMENO_DVERI_DO_ARENY, new FixedMetadataValue(plugin, true));
         dvere.add(block);
-        uloziste.pridej(DVERE_DO_ARENY_ZNACKA, block.getLocation());
+        uloziste.pridej(JMENO_DVERI_DO_ARENY, block.getLocation());
     }
 
     public void odeberDvere(Block block) {
-        uloziste.odeber(DVERE_DO_ARENY_ZNACKA, block.getLocation());
+        uloziste.odeber(JMENO_DVERI_DO_ARENY, block.getLocation());
         dvere.remove(block);
-        block.removeMetadata(DVERE_DO_ARENY_ZNACKA, plugin);
+        block.removeMetadata(JMENO_DVERI_DO_ARENY, plugin);
     }
 
     public void clear() {

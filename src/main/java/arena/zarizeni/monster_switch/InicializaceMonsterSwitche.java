@@ -7,8 +7,7 @@ import org.bukkit.metadata.FixedMetadataValue;
 import org.bukkit.plugin.Plugin;
 import java.util.Set;
 
-import static arena.zarizeni.monster_switch.MonsterSwitchListener.MONSTER_SWITCH_ZNACKA;
-
+import static arena.zarizeni.monster_switch.MonsterSwitchCommand.MONSTER_SWITCH_NAME;
 
 public final class InicializaceMonsterSwitche {
 
@@ -23,9 +22,9 @@ public final class InicializaceMonsterSwitche {
     }
 
     public void inicializace() {
-        Set<Location> locations = uloziste.nacti(MONSTER_SWITCH_ZNACKA);
+        Set<Location> locations = uloziste.nacti(MONSTER_SWITCH_NAME);
         for (var location : locations) {
-            world.getBlockAt(location).setMetadata(MONSTER_SWITCH_ZNACKA, new FixedMetadataValue(plugin, true));
+            world.getBlockAt(location).setMetadata(MONSTER_SWITCH_NAME, new FixedMetadataValue(plugin, true));
         }
     }
 }

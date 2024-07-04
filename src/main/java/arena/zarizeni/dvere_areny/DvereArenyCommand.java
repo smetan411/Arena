@@ -7,8 +7,10 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
+import static arena.zarizeni.dvere_areny.DvereAreny.*;
 
-public class DvereArenyCommands implements CommandExecutor {
+
+public class DvereArenyCommand implements CommandExecutor {
 
     @Override
     public boolean onCommand(CommandSender commandSender, Command command, String s, String[] strings) {
@@ -18,7 +20,7 @@ public class DvereArenyCommands implements CommandExecutor {
             ItemStack dvere = new ItemStack(Material.OAK_DOOR, 1);
             var itemMeta = dvere.getItemMeta();
             if (itemMeta == null) return false;
-            itemMeta.setDisplayName(DvereAreny.JMENO_DVERI_DO_ARENY);
+            itemMeta.setDisplayName(JMENO_DVERI_DO_ARENY);
             dvere.setItemMeta(itemMeta);
             player.getInventory().addItem(dvere);
         }

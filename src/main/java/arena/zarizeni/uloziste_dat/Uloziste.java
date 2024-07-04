@@ -13,12 +13,13 @@ import org.bukkit.persistence.PersistentDataType;
 import org.bukkit.plugin.Plugin;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 public final class Uloziste {
 
     private final World world;
     // uloziste - druh bloku
-    private final TileState uloziste;
+    private TileState uloziste;
     private final Plugin plugin;
 
     public Uloziste(World world, Plugin plugin) {
@@ -34,6 +35,13 @@ public final class Uloziste {
     }
 
     // ulozime pro klic key seznam lokaci locations
+    public void smazCeleUloziste() {
+        Block block0 = world.getBlockAt(0, 0, 0);
+        block0.setType(Material.AIR);
+        block0.setType(Material.CHEST);
+        uloziste = (TileState) block0.getState();
+    }
+
      public void uloz(String key, Set<Location> locations) {
         PersistentDataContainer container = uloziste.getPersistentDataContainer();
         NamespacedKey namespaceKey = new NamespacedKey(plugin, key);
@@ -47,12 +55,6 @@ public final class Uloziste {
         uloziste.update(true, false);
     }
 
-    public void smaz(String key) {
-        PersistentDataContainer container = uloziste.getPersistentDataContainer();
-        container.remove(new NamespacedKey(plugin, key));
-        uloziste.update(true, false);
-    }
-
     public Set<Location> nacti(String key) {
         PersistentDataContainer container = uloziste.getPersistentDataContainer();
         int[] souradnice = container.get(new NamespacedKey(plugin, key), PersistentDataType.INTEGER_ARRAY);
@@ -62,6 +64,29 @@ public final class Uloziste {
             locations.add(new Location(world, souradnice[i], souradnice[i+1], souradnice[i+2]));
         }
         return locations;
+    }
+
+    public void print() {
+        PersistentDataContainer container = uloziste.getPersistentDataContainer();
+        Set<NamespacedKey> keys = container.getKeys();
+        for (var key : keys) {
+            int[] souradnice = container.get(key, PersistentDataType.INTEGER_ARRAY);
+            Set<Location> locations = new HashSet<>();
+            if (souradnice == null) {
+                plugin.getLogger().info("Key: " + key.getKey());
+                plugin.getLogger().info("Empty");
+                return;
+            }
+            for (int i = 0; i < souradnice.length; i = i + 3) {
+                locations.add(new Location(world, souradnice[i], souradnice[i + 1], souradnice[i + 2]));
+            }
+            plugin.getLogger().info("Key: " + key);
+            plugin.getLogger().info(locations.stream()
+                    .map(loc -> "(" + loc.getX() + ":" + loc.getY() + ":" + loc.getZ() + ")")
+                    .toList()
+                    .toString()
+            );
+        }
     }
 
     public void pridej(String key, Location location) {

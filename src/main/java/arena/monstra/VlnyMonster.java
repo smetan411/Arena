@@ -9,6 +9,7 @@ public final class VlnyMonster {
     private int maxPocitadlo = 10;
 
     public VlnyMonster(TovarnaNaZombiky tovarnaNaZombiky) {
+
         this.tovarnaNaZombiky = tovarnaNaZombiky;
     }
 
