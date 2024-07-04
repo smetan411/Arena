@@ -16,12 +16,12 @@ import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
 
-public final class Obchodnik implements CommandExecutor {
+public final class ObchodnikZbrane implements CommandExecutor {
     private final TovarnaNaZbrane tovarnaNaZbrane;
     private final TovarnaNaZbroje tovarnaNaZbroje;
     public static final String JMENO_OBCHODNIKA = "ObchodnikProHrace";
 
-    public Obchodnik() {
+    public ObchodnikZbrane() {
         tovarnaNaZbrane = new TovarnaNaZbrane();
         tovarnaNaZbroje = new TovarnaNaZbroje();
     }
@@ -102,18 +102,8 @@ public final class Obchodnik implements CommandExecutor {
 
 
         //items
-
         MerchantRecipe stit = new MerchantRecipe(tovarnaNaZbrane.vyrobStit(), 9999);
         stit.addIngredient(new ItemStack(Material.GOLD_NUGGET, 5));
-
-        MerchantRecipe lapis = new MerchantRecipe(tovarnaNaZbrane.vyrobLapizLazuli(), 9999);
-        lapis.addIngredient(new ItemStack(Material.GOLD_NUGGET, 1));
-
-        MerchantRecipe zlateJabko = new MerchantRecipe(tovarnaNaZbrane.vyrobZlateJabko(), 9999);
-        zlateJabko.addIngredient(new ItemStack(Material.GOLD_NUGGET, 20));
-
-        MerchantRecipe ocarovaneZlateJabko = new MerchantRecipe(tovarnaNaZbrane.vyrobOcarovaneZlateJablko(), 9999);
-        ocarovaneZlateJabko.addIngredient(new ItemStack(Material.GOLD_NUGGET, 50));
 
         //kouzelne zbrane
         MerchantRecipe frozenSword = new MerchantRecipe(tovarnaNaZbrane.vyrobFrozenSword(), 9999);
@@ -127,7 +117,7 @@ public final class Obchodnik implements CommandExecutor {
                 (trainingSword, trainingHelmet, trainingChestPlate, trainingLeggins, trainingBoots, normalSword, chainMaleHelmet,
                         chainMaleChestPlate, chainMaleLeggins, chainMaleBoots, proSword, plateHelmet, chestPlate, plateLeggins,
                         plateBoots, gladiatorSword, gladiatorHelmet, gladiatorChestPlate, gladiatorLeggins, gladiatorBoots, stit,
-                        lapis, zlateJabko, ocarovaneZlateJabko, frozenSword, healingSword));
+                        frozenSword, healingSword));
         return true;
     }
 
