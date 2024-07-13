@@ -26,12 +26,12 @@ public class ZbraneListener implements Listener {
 
         //zmrazici mec
         if (FROZEN_SWORD.equals(vecVPraveRuce)) {
-            zijciEntita.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 6000, 3, true));
+            zijciEntita.addPotionEffect(new PotionEffect(PotionEffectType.SLOWNESS, 6000, 3, true));
         }
 
         //lecici mec
         if (HEALING_SWORD.equals(vecVPraveRuce)) {
-            player.addPotionEffect(new PotionEffect(PotionEffectType.HEAL, 1, 1, true));
+            player.addPotionEffect(new PotionEffect(PotionEffectType.HEALTH_BOOST, 1, 1, true));
         }
     }
 }

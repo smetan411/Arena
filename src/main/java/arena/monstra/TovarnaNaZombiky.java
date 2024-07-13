@@ -85,7 +85,7 @@ public final class TovarnaNaZombiky {
                 zombie.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, 1000000000, regenerace));
             }
             if (sila != null) {
-                zombie.addPotionEffect(new PotionEffect(PotionEffectType.INCREASE_DAMAGE, 1000000000, sila));
+                zombie.addPotionEffect(new PotionEffect(PotionEffectType.INSTANT_DAMAGE, 1000000000, sila));
             }
 
             if (speed != null) {
