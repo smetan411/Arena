@@ -74,11 +74,8 @@ public class TovarnaNaJidlo {
         PotionMeta meta = (PotionMeta) lektvar.getItemMeta();
         meta.setColor(Color.RED);
         meta.setDisplayName(ChatColor.RED + "Lektvar leceni");
-        meta.addCustomEffect(new PotionEffect(PotionEffectType.HEALTH_BOOST, 1, 4,true, false), true);
+        meta.addCustomEffect(new PotionEffect(PotionEffectType.INSTANT_HEALTH, 1, 4,true, false), true);
         lektvar.setItemMeta(meta);
         return lektvar;
     }
-
-
-
 }
